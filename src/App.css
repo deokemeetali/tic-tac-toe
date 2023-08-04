@@ -1,0 +1,28 @@
+/* Basic Tic Tac Toe button styles */
+.square {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 36px;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+    
+  }
+  
+  /* Hover effect */
+  .square:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Active or clicked effect */
+  .square:active {
+    background-color: #d0d0d0;
+  }
+  
