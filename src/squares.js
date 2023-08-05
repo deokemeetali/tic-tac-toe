@@ -1,4 +1,4 @@
 function Squares(props){
-    return(<><button className="square" onClick={props.handleclick}>{props.squarevalue}</button></>)
+    return(<><button className="square" onClick={props.handleClick}>{props.squareValue}</button></>)
 }
 export default Squares;

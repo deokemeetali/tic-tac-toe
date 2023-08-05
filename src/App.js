@@ -3,66 +3,113 @@ import './App.css';
 import Squares from './squares';
 import { useState } from 'react';
 
-function App() {
-  const [square,setSquare]=useState(Array(9).fill(null));
-  const [xisnext,setXisnext]=useState(true);
-  function handleclick(i){
-    if(square[i] || calculatewinner(square)){
+ function App() {
+
+ const [ squares, setSquares] = useState(Array(9).fill(null));
+const [xisNext, setXisnext ] = useState(true);
+
+function handleClick(i){
+
+  if(squares[i] || calculateWinner(squares)){
+    return;
+  }
+  let userEnterArray = [...squares];
+  if(xisNext){
+    userEnterArray[i] = "X";
+  }
+  else{
+    userEnterArray[i] = "O";
+  }  
+  setSquares(userEnterArray); 
+  setXisnext(!xisNext);
+ 
+ }
+
+ function calculateWinner(squares){
+  const lines =[
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+  ]
+
+  for(let i =0; i< lines.length; i++){
+     const[a,b,c] =lines[i];
+     if(squares[a]  && squares[a]=== squares[b] && squares[a] === squares[c]){
+      console.log("winner is" + squares[a])
+       return squares[a];
+
+     }
+  }
+  return null;
+ } /* function handleClick(i) {
+    if (squares[i] || calculateWinner(squares)) {
       return;
     }
-    let userenterarray=[...square];
-     if(xisnext){
-      userenterarray[i]="X";
-     }
 
-     else{
-      userenterarray[i]="O";
-     }
-    setSquare(userenterarray);
-    setXisnext(!xisnext);
-     }
-  
-  function calculatewinner(square){
-     const lines = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
-     ]
-     for(let i=0;i<lines.length;i++){
-      const[a,b,c]=lines[i];
-      if(square[a]&&square[a]===square[b]&&square[a]===square[c]){
-        console.log("winner is", square[a]);
-        return square[a];
-      }
-     }
-     return null;
+    const userEnterArray = [...squares];
+    userEnterArray[i] = xisNext ? 'X' : 'O';
+
+    setSquares(userEnterArray);
+    setXisnext(!xisNext);
+  }*/
+  function renderSquare(i) {
+    return (
+      <Squares
+        squareValue={squares[i]}
+        handleClick={() => handleClick(i)}
+      />
+    );
   }
-  
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = `Winner: ${winner}`;
+  } else if (squares.every(square => square !== null)) {
+    status = "It's a draw!";
+  } else {
+    status = xisNext ? 'Next player: X' : 'Next player: O';
+  }
 
-  
-  return  (
-<>
-<div>
-<Squares squarevalue={square[0]} handleclick={()=>handleclick(0)}/>
-<Squares squarevalue={square[1]} handleclick={()=>handleclick(1)}/>
-<Squares squarevalue={square[2]} handleclick={()=>handleclick(2)}/>
-</div>
-<div>
-<Squares squarevalue={square[3]} handleclick={()=>handleclick(3)}/>
-<Squares squarevalue={square[4]} handleclick={()=>handleclick(4)}/>
-<Squares squarevalue={square[5]} handleclick={()=>handleclick(5)}/>
-</div>
-<div>
-<Squares squarevalue={square[6]} handleclick={()=>handleclick(6)}/>
-<Squares squarevalue={square[7]} handleclick={()=>handleclick(7)}/>
-<Squares squarevalue={square[8]} handleclick={()=>handleclick(8)}/>
-</div>
-</>
-  );
+ // const winner = calculateWinner(squares);
+ // const status = winner ? `Winner: ${winner}` : xisNext ? 'Next player: X' : 'Next player: O';
+
+ function handleRestart() {
+  setSquares(Array(9).fill(null));
+  setXisnext(true);
 }
+const isGameOver = winner || squares.every(square => square !== null);
 
-export default App;
+return (
+  <>
+  <div className="status">{status}</div>
+  <div className='tic'>
+      <div className="board-row">
+          <Squares squareValue = {squares[0]} handleClick={() =>handleClick(0)}/>
+          <Squares squareValue = {squares[1]} handleClick={() =>handleClick(1)}/>
+         <Squares squareValue = {squares[2]} handleClick={() =>handleClick(2)}/>
+     </div>
+     <div className="board-row">
+      <Squares squareValue ={squares[3]} handleClick={() =>handleClick(3)}/>
+     <Squares squareValue = {squares[4]} handleClick={() =>handleClick(4)}/>
+     <Squares squareValue = {squares[5]} handleClick={() =>handleClick(5)}/>
+     </div>
+     <div className="board-row">
+     <Squares squareValue = {squares[6]} handleClick={() =>handleClick(6)}/>
+     <Squares squareValue = {squares[7]} handleClick={() =>handleClick(7)}/>
+     <Squares squareValue = {squares[8]} handleClick={() =>handleClick(8)}/>
+      </div>
+      </div>
+      <div className="button-container">
+        <button onClick={handleRestart}>Restart</button>
+      </div>
+      
+  </>
+    );
+ }
+
+export default App;

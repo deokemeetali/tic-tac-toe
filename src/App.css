@@ -1,28 +1,64 @@
-/* Basic Tic Tac Toe button styles */
+/* Improve square styling */
 .square {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 36px;
-    text-align: center;
-    line-height: 100px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    outline: none;
-    box-sizing: border-box;
-    
-  }
+  background: white;
+  height: 80px;
+  width: 80px;
+  font-size: 24px; /* Slightly reduced font size for better fit */
+  font-weight: bold;
+  display: flex; /* Use flexbox for centering content */
+  justify-content: center;
+  text-align: center;
+  border: 5px solid black;
+  color: coral;
+  padding: 15px;
+
+}
+
+
+/* Improve board row styling */
+.board-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
-  /* Hover effect */
-  .square:hover {
-    background-color: #e0e0e0;
-  }
   
-  /* Active or clicked effect */
-  .square:active {
-    background-color: #d0d0d0;
-  }
+}
+
+/* Improve tic positioning */
+.tic {
+  margin-top: 20px; /* Reduce the top margin for better positioning */
+  border: 8px solid darkgrey;
+  box-shadow: 10px 10px 10px  black;
+  border-radius: 5%;
+  background-color: #fff;
+}
+.status {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 24px;
+  background-color: lightblue;
+  color: rgb(40, 41, 35);
+  box-shadow: 5px 5px 5px  black;
+  border-radius: 10%;
+}
+
+/* Improve body background */
+body {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure the game is centered vertically */
+}
+.button-container {
+  display: flex;
+  justify-content: center; /* Horizontally center the button */
+  margin-top: 20px; /* Optional: Add some top margin for spacing */
+  background-color: #f7f7f7;
   
+}
+.button-container button:hover {
+  background-color: #45a049; /* Change the background color on hover */
+  cursor: pointer; /* Set a pointer cursor when hovering over the button */
+  color: #fff;
+}
